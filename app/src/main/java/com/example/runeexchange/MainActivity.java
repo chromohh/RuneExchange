@@ -86,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onResponse(JSONArray response) {
                         Toast.makeText(getApplicationContext(), "data loaded", Toast.LENGTH_SHORT).show();
                         Log.e("Response", response.toString());
+                        coolSpinning.setVisibility(View.INVISIBLE);
                     }
                 },
                 new Response.ErrorListener() {
