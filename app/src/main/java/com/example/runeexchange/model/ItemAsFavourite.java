@@ -1,14 +1,13 @@
 package com.example.runeexchange.model;
 
-
-public class Item {
+public class ItemAsFavourite {
     private int id;
     private double priceWhenAdded;
     private double currentPrice;
     private String change;
     private String name;
 
-    public Item(int id, double priceWhenAdded, String name) {
+    public ItemAsFavourite(int id, double priceWhenAdded, String name) {
         this.id = id;
         this.priceWhenAdded = priceWhenAdded;
         this.name = name;
@@ -56,7 +55,7 @@ public class Item {
 
     @Override
     public String toString() {
-        return "Item{" +
+        return "ItemAsFavourite{" +
                 "id=" + id +
                 ", priceWhenAdded=" + priceWhenAdded +
                 ", currentPrice=" + currentPrice +

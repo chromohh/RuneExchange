@@ -20,30 +20,31 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.example.runeexchange.data.AcquireData;
 import com.example.runeexchange.data.DataTools;
+import com.example.runeexchange.model.ItemAsData;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private RequestQueue requestQueue;
     private DataTools datatools = new DataTools();
     private ProgressBar coolSpinning;
-    private ArrayList<String> data;
+    private ArrayList<ItemAsData> data;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         coolSpinning = findViewById(R.id.progressBar);
 
+        data =  new ArrayList<ItemAsData>();
         updateData();
 
     }
@@ -84,9 +85,21 @@ public class MainActivity extends AppCompatActivity {
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Toast.makeText(getApplicationContext(), "data loaded", Toast.LENGTH_SHORT).show();
-                        Log.e("Response", response.toString());
+                        for(int i=0; i<response.length(); i++){
+                            try {
+                                JSONObject object = response.getJSONObject(i);
+                                ItemAsData temp = new ItemAsData(
+                                        object.getString("id"),
+                                        object.getString("name"),
+                                        object.getString("price"));
+                                data.add(temp);
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
                         coolSpinning.setVisibility(View.INVISIBLE);
+                        Toast.makeText(getApplicationContext(), "data loaded", Toast.LENGTH_SHORT).show();
                     }
                 },
                 new Response.ErrorListener() {
@@ -96,7 +109,6 @@ public class MainActivity extends AppCompatActivity {
                         Log.e("volley error", e.toString());
                     }
                 });
-
         requestQueue.add(getRequest);
 
     }
