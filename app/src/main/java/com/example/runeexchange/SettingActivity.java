@@ -25,7 +25,6 @@ public class SettingActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        //skapar menyn
         getMenuInflater().inflate(R.menu.top_menu, menu);
 
         return true;
