@@ -1,5 +1,7 @@
 package com.example.runeexchange.model;
 
+import java.text.DecimalFormat;
+
 public class ItemAsFavourite {
     private int id;
     private double priceWhenAdded;
@@ -21,12 +23,20 @@ public class ItemAsFavourite {
         return priceWhenAdded;
     }
 
-    public double getCurrentPrice() {
-        return currentPrice;
-    }
+    public double getCurrentPrice() { return currentPrice; }
 
     public String getChange() {
-        return change;
+        if(currentPrice != 0 || priceWhenAdded != 0){
+            double tempChange = currentPrice / priceWhenAdded * 100;
+            DecimalFormat df = new DecimalFormat("#.##");
+            if(tempChange>100){
+                return "+" + String.valueOf(df.format(tempChange)) + "%";
+            }
+            else{
+                return "-" + String.valueOf(df.format(tempChange)) + "%";
+            }
+        }
+        return "0";
     }
 
     public String getName() {

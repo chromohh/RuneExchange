@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
     }
 
+    //flytta
     private void updateData(){
         requestQueue = AcquireData.getInstance(this).getReqQueue();
         JsonArrayRequest getRequest = new JsonArrayRequest(Request.Method.GET, datatools.getBASE_URL() + "/item/prices", null,
