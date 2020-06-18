@@ -4,12 +4,12 @@ import java.text.DecimalFormat;
 
 public class ItemAsFavourite {
     private int id;
-    private double priceWhenAdded;
-    private double currentPrice;
+    private int priceWhenAdded;
+    private int currentPrice;
     private String change;
     private String name;
 
-    public ItemAsFavourite(int id, double priceWhenAdded, String name) {
+    public ItemAsFavourite(int id, int priceWhenAdded, String name) {
         this.id = id;
         this.priceWhenAdded = priceWhenAdded;
         this.name = name;
@@ -47,11 +47,11 @@ public class ItemAsFavourite {
         this.id = id;
     }
 
-    public void setPriceWhenAdded(double priceWhenAdded) {
+    public void setPriceWhenAdded(int priceWhenAdded) {
         this.priceWhenAdded = priceWhenAdded;
     }
 
-    public void setCurrentPrice(double currentPrice) {
+    public void setCurrentPrice(int currentPrice) {
         this.currentPrice = currentPrice;
     }
 
