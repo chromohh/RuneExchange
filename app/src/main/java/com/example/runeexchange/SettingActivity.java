@@ -26,7 +26,7 @@ public class SettingActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.top_menu, menu);
-
+        menu.findItem(R.id.menu_search).setVisible(false);
         return true;
     }
 

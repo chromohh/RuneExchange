@@ -4,6 +4,8 @@ import android.view.LayoutInflater;
 import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,12 +14,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.runeexchange.model.ItemAsData;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
-public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MyViewHolder> {
+public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MyViewHolder> implements Filterable {
+
     private ArrayList<ItemAsData> data;
+    private ArrayList<ItemAsData> dataHard;
 
     public MainAdapter(ArrayList<ItemAsData> items){
         data = items;
+        dataHard = new ArrayList<>(items);
     }
 
     @NonNull
@@ -41,6 +48,40 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MyViewHolder> 
         holder.price.setText(price);
 
     }
+
+    @Override
+    public Filter getFilter() {
+        return myFilter;
+    }
+
+    private Filter myFilter = new Filter(){
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<ItemAsData> filteredList = new ArrayList<>();
+
+            if (constraint == null || constraint.length() == 0){
+                filteredList.addAll(dataHard);
+            } else {
+                String filterPattern = constraint.toString().toLowerCase().trim();
+
+                for(ItemAsData item : dataHard){
+                    if (item.getName().toLowerCase().contains(filterPattern)){
+                        filteredList.add(item);
+                    }
+                }
+            }
+
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+            return results;
+        }
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            data.clear();
+            data.addAll((List) results.values);
+            notifyDataSetChanged();
+        }
+    };
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
         private TextView title;

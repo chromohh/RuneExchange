@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -20,6 +21,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.example.runeexchange.LocalData.DBTools;
 import com.example.runeexchange.data.AcquireData;
 import com.example.runeexchange.data.DataTools;
 import com.example.runeexchange.model.ItemAsData;
@@ -39,10 +41,10 @@ public class MainActivity extends AppCompatActivity {
     private ProgressBar coolSpinning;
 
     private RecyclerView recyclerView;
-    private RecyclerView.Adapter adapter;
+    private MainAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
 
-
+    private DBTools db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         coolSpinning = findViewById(R.id.progressBar);
+        db = new DBTools(this);
 
         data =  new ArrayList<ItemAsData>();
         updateData();
@@ -71,6 +74,20 @@ public class MainActivity extends AppCompatActivity {
         //skapar menyn
         getMenuInflater().inflate(R.menu.top_menu, menu);
 
+        MenuItem searchItem = menu.findItem(R.id.menu_search);
+        SearchView searchView = (SearchView) searchItem.getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
         return true;
     }
 
