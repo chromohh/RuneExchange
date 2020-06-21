@@ -45,12 +45,10 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MyViewHolder> 
     public class MyViewHolder extends RecyclerView.ViewHolder{
         private TextView title;
         private TextView price;
-
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.card_name);
             price = itemView.findViewById(R.id.card_price);
-
         }
     }
 }
