@@ -3,6 +3,8 @@ package com.example.runeexchange;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -32,8 +34,14 @@ public class MainActivity extends AppCompatActivity {
 
     private RequestQueue requestQueue;
     private DataTools datatools = new DataTools();
-    private ProgressBar coolSpinning;
     private ArrayList<ItemAsData> data;
+
+    private ProgressBar coolSpinning;
+
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter adapter;
+    private RecyclerView.LayoutManager layoutManager;
+
 
 
     @Override
@@ -46,6 +54,15 @@ public class MainActivity extends AppCompatActivity {
 
         data =  new ArrayList<ItemAsData>();
         updateData();
+    }
+
+    private void buildRecycleView(){
+        layoutManager = new LinearLayoutManager(this);
+        adapter = new MainAdapter(data);
+        recyclerView = findViewById(R.id.recyclerViewMain);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
 
     }
 
@@ -100,6 +117,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }
                         coolSpinning.setVisibility(View.INVISIBLE);
+                        buildRecycleView();
                         Toast.makeText(getApplicationContext(), "data loaded", Toast.LENGTH_SHORT).show();
                     }
                 },

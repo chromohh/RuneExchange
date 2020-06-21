@@ -55,10 +55,6 @@ public class DBTools extends SQLiteOpenHelper {
     }
 
 
-    public void updatePrice(){
-
-    }
-
     public List<ItemAsFavourite> getAllFavourites(){
         SQLiteDatabase db = this.getReadableDatabase();
         List<ItemAsFavourite> retList = new ArrayList<>();
