@@ -7,7 +7,6 @@ import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
 
 import com.example.runeexchange.LocalData.DBTools;
 import com.example.runeexchange.data.DataTools;

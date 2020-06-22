@@ -10,7 +10,7 @@
         android:id="@+id/toolbar"
         layout="@layout/toolbar"
         tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="6dp"></include>
+        tools:layout_editor_absoluteY="6dp" />
 
     <ProgressBar
         android:id="@+id/progressBar"

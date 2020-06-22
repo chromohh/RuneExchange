@@ -22,7 +22,7 @@
             android:background="@color/colorAccent">
 
             <TextView
-                android:id="@+id/card_name"
+                android:id="@+id/favourite_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/placeholder"
@@ -33,7 +33,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/card_price"
+                android:id="@+id/favourite_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/placeholder"
@@ -42,20 +42,41 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.097"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/card_name"
+                app:layout_constraintTop_toBottomOf="@+id/favourite_name"
                 app:layout_constraintVertical_bias="0.0" />
 
             <ImageView
-                android:id="@+id/card_favourite"
+                android:id="@+id/favourite_delete"
                 android:layout_width="61dp"
                 android:layout_height="45dp"
+                android:contentDescription="TODO"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.98"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_star_black_24dp"
-                android:contentDescription="TODO" />
+                app:srcCompat="@drawable/ic_delete_black_24dp" />
+
+            <TextView
+                android:id="@+id/favourite_price_bought_at"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/placeholder"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/favourite_delete"
+                app:layout_constraintStart_toEndOf="@+id/favourite_name"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.195" />
+
+            <TextView
+                android:id="@+id/favourite_change"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/placeholder"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/favourite_delete"
+                app:layout_constraintStart_toEndOf="@+id/favourite_price"
+                app:layout_constraintTop_toBottomOf="@+id/favourite_price_bought_at" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
-import com.example.runeexchange.model.ItemAsData;
 import com.example.runeexchange.model.ItemAsFavourite;
 
 import java.util.ArrayList;
