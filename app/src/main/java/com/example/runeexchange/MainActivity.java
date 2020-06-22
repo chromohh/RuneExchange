@@ -24,6 +24,7 @@ import com.example.runeexchange.LocalData.DBTools;
 import com.example.runeexchange.data.AcquireData;
 import com.example.runeexchange.data.DataTools;
 import com.example.runeexchange.model.ItemAsData;
+import com.example.runeexchange.model.ItemAsFavourite;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -69,7 +70,9 @@ public class MainActivity extends AppCompatActivity {
         adapter.setOnItemClickListener(new MainAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                db.convertDataItemToFavouriteItem(data.get(position));
+                ItemAsData currentPress = data.get(position);
+                db.addItemToDb(new ItemAsFavourite(Integer.parseInt(currentPress.getId()), Integer.parseInt(currentPress.getPrice()), currentPress.getName()));
+                Toast.makeText(getApplicationContext(), "data saved to db", Toast.LENGTH_SHORT).show();
             }
         });
 
