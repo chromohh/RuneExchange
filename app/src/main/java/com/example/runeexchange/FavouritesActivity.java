@@ -7,6 +7,7 @@ import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.runeexchange.LocalData.DBTools;
 import com.example.runeexchange.data.DataTools;
@@ -22,6 +23,10 @@ public class FavouritesActivity extends AppCompatActivity {
     private List<ItemAsFavourite> favouriteData;
     private DBTools dbTools;
     private DataTools dataTools;
+
+    private RecyclerView recyclerView;
+    private FavouritesAdapter adapter;
+    private RecyclerView.LayoutManager layoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
