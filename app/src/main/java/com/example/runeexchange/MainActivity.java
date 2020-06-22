@@ -29,6 +29,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -68,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         adapter.setOnItemClickListener(new MainAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                Toast.makeText(getApplicationContext(), "item pressed", Toast.LENGTH_SHORT).show();
+                db.convertDataItemToFavouriteItem(data.get(position));
             }
         });
 
@@ -106,6 +107,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.menu_favourite:
                 Intent startFavouriteIntent = new Intent(this, FavouritesActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("data", data);
+                startFavouriteIntent.putExtras(bundle);
                 startFavouriteIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(startFavouriteIntent);
                 break;

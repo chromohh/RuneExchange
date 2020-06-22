@@ -9,12 +9,33 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 
+import com.example.runeexchange.LocalData.DBTools;
+import com.example.runeexchange.data.DataTools;
+import com.example.runeexchange.model.ItemAsData;
+import com.example.runeexchange.model.ItemAsFavourite;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class FavouritesActivity extends AppCompatActivity {
+
+    private List<ItemAsData> data;
+    private List<ItemAsFavourite> favouriteData;
+    private DBTools dbTools;
+    private DataTools dataTools;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favourite);
+        dataTools = new DataTools();
+        dbTools = new DBTools(this);
+
+        Bundle bundleObject = getIntent().getExtras();
+        data = (ArrayList<ItemAsData>) bundleObject.getSerializable("data");
+
+        favouriteData = dbTools.getAllFavourites();
+        dataTools.updateFavouriteItemPrices(data, favouriteData);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
