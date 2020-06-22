@@ -2,11 +2,14 @@ package com.example.runeexchange;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.runeexchange.LocalData.DBTools;
@@ -35,14 +38,29 @@ public class FavouritesActivity extends AppCompatActivity {
         dataTools = new DataTools();
         dbTools = new DBTools(this);
 
-        Bundle bundleObject = getIntent().getExtras();
-        data = (ArrayList<ItemAsData>) bundleObject.getSerializable("data");
+        data = this.getIntent().getParcelableArrayListExtra("data");
 
         favouriteData = dbTools.getAllFavourites();
         dataTools.updateFavouriteItemPrices(data, favouriteData);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        buildRecycleView();
+    }
+
+    private void buildRecycleView(){
+        layoutManager = new LinearLayoutManager(this);
+        adapter = new FavouritesAdapter((ArrayList<ItemAsFavourite>) favouriteData);
+        recyclerView = findViewById(R.id.recyclerViewFavourites);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
+        adapter.setOnItemClickListener(new FavouritesAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+
+            }
+        });
     }
 
     @Override

@@ -109,9 +109,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.menu_favourite:
                 Intent startFavouriteIntent = new Intent(this, FavouritesActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("data", data);
-                startFavouriteIntent.putExtras(bundle);
+                startFavouriteIntent.putParcelableArrayListExtra("data", data);
                 startFavouriteIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(startFavouriteIntent);
                 break;

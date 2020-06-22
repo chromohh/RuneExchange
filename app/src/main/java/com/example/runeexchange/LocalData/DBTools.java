@@ -83,6 +83,13 @@ public class DBTools extends SQLiteOpenHelper {
     }
 
 
+    public void deleteAll(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(ITEM_TABLE,null,null);
+        db.execSQL("delete from "+ ITEM_TABLE);
+        db.close();
+    }
+
 
 
 
