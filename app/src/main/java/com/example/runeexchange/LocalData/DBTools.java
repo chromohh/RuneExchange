@@ -83,8 +83,19 @@ public class DBTools extends SQLiteOpenHelper {
         return true;
     }
 
-    public boolean convertDataItemToFavouriteItem(){
-        return true;
+    public boolean convertDataItemToFavouriteItem(ItemAsData itemToConvert){
+        try{
+            ItemAsFavourite converted = new ItemAsFavourite(
+                    Integer.getInteger(itemToConvert.getId()),
+                    Integer.getInteger(itemToConvert.getPrice()),
+                    itemToConvert.getName());
+            addItemToDb(converted);
+            return true;
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        return false;
     }
 
 

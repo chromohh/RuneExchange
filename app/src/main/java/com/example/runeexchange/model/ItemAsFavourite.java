@@ -6,7 +6,6 @@ public class ItemAsFavourite {
     private int id;
     private int priceWhenAdded;
     private int currentPrice;
-    private String change;
     private String name;
 
     public ItemAsFavourite(int id, int priceWhenAdded, String name) {
@@ -55,10 +54,6 @@ public class ItemAsFavourite {
         this.currentPrice = currentPrice;
     }
 
-    public void setChange(String change) {
-        this.change = change;
-    }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -69,7 +64,6 @@ public class ItemAsFavourite {
                 "id=" + id +
                 ", priceWhenAdded=" + priceWhenAdded +
                 ", currentPrice=" + currentPrice +
-                ", change='" + change + '\'' +
                 ", name='" + name + '\'' +
                 '}';
     }
