@@ -43,7 +43,7 @@ public class DBTools extends SQLiteOpenHelper {
         ContentValues cv = new ContentValues();
         cv.put(COLUMN_ITEM_ID, item.getId());
         cv.put(COLUMN_ITEM_NAME, item.getName());
-        cv.put(COLUMN_ITEM_CURRENT_PRICE, item.getCurrentPrice());
+        cv.put(COLUMN_ITEM_CURRENT_PRICE, item.getPriceWhenAdded());
         long insertStatus = db.insert(ITEM_TABLE,null,cv);
         if(insertStatus == -1){
             db.close();
@@ -83,18 +83,6 @@ public class DBTools extends SQLiteOpenHelper {
         return true;
     }
 
-    public void convertDataItemToFavouriteItem(ItemAsData itemToConvert){
-        try{
-            ItemAsFavourite converted = new ItemAsFavourite(
-                    Integer.getInteger(itemToConvert.getId()),
-                    Integer.getInteger(itemToConvert.getPrice()),
-                    itemToConvert.getName());
-            addItemToDb(converted);
-        }
-        catch(Exception e){
-            e.printStackTrace();
-        }
-    }
 
 
 
