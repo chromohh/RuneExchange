@@ -14,13 +14,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.runeexchange.model.ItemAsData;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MyViewHolder> implements Filterable {
 
     private ArrayList<ItemAsData> data;
     private ArrayList<ItemAsData> dataHard;
+    private OnItemClickListener listener;
 
     public MainAdapter(ArrayList<ItemAsData> items){
         data = items;
@@ -31,7 +31,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MyViewHolder> 
     @Override
     public MainAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.main_item, parent, false);
-        MyViewHolder mvh = new MyViewHolder(v);
+        MyViewHolder mvh = new MyViewHolder(v, listener);
         return mvh;
     }
 
@@ -83,13 +83,33 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MyViewHolder> 
         }
     };
 
-    public class MyViewHolder extends RecyclerView.ViewHolder{
+    public interface OnItemClickListener{
+        void onItemClick(int position);
+    }
+
+    public  void setOnItemClickListener(OnItemClickListener lisen){
+        listener = lisen;
+    }
+
+    public static class MyViewHolder extends RecyclerView.ViewHolder{
         private TextView title;
         private TextView price;
-        public MyViewHolder(@NonNull View itemView) {
+        public MyViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
             super(itemView);
             title = itemView.findViewById(R.id.card_name);
             price = itemView.findViewById(R.id.card_price);
+
+            itemView.findViewById(R.id.card_favourite).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(listener != null){
+                        int position = getAdapterPosition();
+                        if(position != RecyclerView.NO_POSITION){
+                            listener.onItemClick(position);
+                        }
+                    }
+                }
+            });
         }
     }
 }

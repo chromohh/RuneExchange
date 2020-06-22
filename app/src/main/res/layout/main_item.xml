@@ -46,7 +46,7 @@
                 app:layout_constraintVertical_bias="0.0" />
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/card_favourite"
                 android:layout_width="61dp"
                 android:layout_height="45dp"
                 app:layout_constraintBottom_toBottomOf="parent"

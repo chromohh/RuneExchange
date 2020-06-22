@@ -83,6 +83,10 @@ public class DBTools extends SQLiteOpenHelper {
         return true;
     }
 
+    public boolean convertDataItemToFavouriteItem(){
+        return true;
+    }
+
 
 
 
