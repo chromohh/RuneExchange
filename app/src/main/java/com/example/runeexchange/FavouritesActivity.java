@@ -57,7 +57,10 @@ public class FavouritesActivity extends AppCompatActivity {
         adapter.setOnItemClickListener(new FavouritesAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-
+                ItemAsFavourite currentPress = favouriteData.get(position);
+                dbTools.deleteByItemId(currentPress);
+                favouriteData.remove(position);
+                adapter.notifyDataSetChanged();
             }
         });
     }
@@ -80,4 +83,5 @@ public class FavouritesActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
 }
