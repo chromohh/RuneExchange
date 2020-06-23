@@ -41,8 +41,7 @@ public class FavouritesActivity extends AppCompatActivity {
         data = this.getIntent().getParcelableArrayListExtra("data");
 
         favouriteData = dbTools.getAllFavourites();
-        dataTools.updateFavouriteItemPrices(data, favouriteData);
-
+        favouriteData = dataTools.updateFavouriteItemPrices(data, favouriteData);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         buildRecycleView();

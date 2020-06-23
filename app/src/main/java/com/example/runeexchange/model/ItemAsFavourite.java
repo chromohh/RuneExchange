@@ -28,11 +28,14 @@ public class ItemAsFavourite {
         if(currentPrice != 0 || priceWhenAdded != 0){
             double tempChange = currentPrice / priceWhenAdded * 100;
             DecimalFormat df = new DecimalFormat("#.##");
+            if(currentPrice == priceWhenAdded ){
+                return "0 %";
+            }
             if(tempChange>100){
-                return "+" + String.valueOf(df.format(tempChange)) + "%";
+                return String.valueOf(df.format(tempChange)) + "%";
             }
             else{
-                return "-" + String.valueOf(df.format(tempChange)) + "%";
+                return String.valueOf(df.format(tempChange)) + "%";
             }
         }
         return "0";

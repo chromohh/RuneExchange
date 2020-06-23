@@ -69,7 +69,7 @@ public class DBTools extends SQLiteOpenHelper {
             }while(cursor.moveToNext());
         }else{
         }
-        cursor.close();;
+        cursor.close();
         db.close();
         return retList;
     }
@@ -83,6 +83,7 @@ public class DBTools extends SQLiteOpenHelper {
     }
 
 
+    //testsyfte
     public void deleteAll(){
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(ITEM_TABLE,null,null);

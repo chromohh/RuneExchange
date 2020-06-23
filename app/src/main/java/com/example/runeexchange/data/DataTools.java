@@ -1,5 +1,7 @@
 package com.example.runeexchange.data;
 
+import android.util.Log;
+
 import com.example.runeexchange.model.ItemAsData;
 import com.example.runeexchange.model.ItemAsFavourite;
 
@@ -13,21 +15,14 @@ public class DataTools {
         return BASE_URL;
     }
 
-    public List<ItemAsFavourite> updateFavouriteItemPrices(List<ItemAsData> data, List<ItemAsFavourite> favouritedata){
-        try{
-        int i = 0;
-        for(ItemAsFavourite item : favouritedata){
+    public List<ItemAsFavourite> updateFavouriteItemPrices(List<ItemAsData> data, List<ItemAsFavourite> favouriteData){
+        for(int i = 0; i < favouriteData.size(); i++ ){
             for(ItemAsData item2 : data){
-                if(item.getId() == Integer.getInteger(item2.getId())){
-                    favouritedata.get(i).setCurrentPrice(Integer.getInteger(item2.getPrice()));
+                if(favouriteData.get(i).getName().equals(item2.getName())){
+                    favouriteData.get(i).setCurrentPrice(Integer.parseInt(item2.getPrice()));
                 }
             }
-            i++;
         }
-        }
-        catch(Exception e){
-            e.printStackTrace();
-        }
-        return favouritedata;
+        return favouriteData;
     }
 }
