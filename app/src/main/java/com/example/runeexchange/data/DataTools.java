@@ -10,7 +10,7 @@ import java.util.List;
 
 public class DataTools {
 
-    private final static String BASE_URL = "https://api.runelite.net/runelite-1.6.20";
+    private final static String BASE_URL = "https://api.runelite.net/runelite-1.6.21";
 
     public String getBASE_URL() {
         return BASE_URL;
