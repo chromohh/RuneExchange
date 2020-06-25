@@ -16,7 +16,7 @@ public class DataTools {
         return BASE_URL;
     }
 
-    public List<ItemAsFavourite> updateFavouriteItemPrices(List<ItemAsData> data, List<ItemAsFavourite> favouriteData){
+    public ArrayList<ItemAsFavourite> updateFavouriteItemPrices(ArrayList<ItemAsData> data, ArrayList<ItemAsFavourite> favouriteData){
         if(data != null || favouriteData != null){
             return new ArrayList<ItemAsFavourite>();
         }

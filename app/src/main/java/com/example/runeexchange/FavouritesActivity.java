@@ -22,8 +22,8 @@ import java.util.List;
 
 public class FavouritesActivity extends AppCompatActivity {
 
-    private List<ItemAsData> data;
-    private List<ItemAsFavourite> favouriteData;
+    private ArrayList<ItemAsData> data;
+    private ArrayList<ItemAsFavourite> favouriteData;
     private DBTools dbTools;
     private DataTools dataTools;
 
@@ -35,15 +35,16 @@ public class FavouritesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favourite);
-        dataTools = new DataTools();
-        dbTools = new DBTools(this);
-
-        data = this.getIntent().getParcelableArrayListExtra("data");
-
-        favouriteData = dbTools.getAllFavourites();
-        favouriteData = dataTools.updateFavouriteItemPrices(data, favouriteData);
+        if(getIntent().hasExtra("data")){
+            data = this.getIntent().getParcelableArrayListExtra("data");
+            favouriteData = dbTools.getAllFavourites();
+            favouriteData = dataTools.updateFavouriteItemPrices(data, favouriteData);
+        }
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        dataTools = new DataTools();
+        dbTools = new DBTools(this);
         buildRecycleView();
     }
 

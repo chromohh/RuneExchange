@@ -58,9 +58,9 @@ public class DBTools extends SQLiteOpenHelper {
     }
 
 
-    public List<ItemAsFavourite> getAllFavourites(){
+    public ArrayList<ItemAsFavourite> getAllFavourites(){
         SQLiteDatabase db = this.getReadableDatabase();
-        List<ItemAsFavourite> retList = new ArrayList<>();
+        ArrayList<ItemAsFavourite> retList = new ArrayList<>();
         String query =  "SELECT * FROM " + ITEM_TABLE ;
         Cursor cursor = db.rawQuery(query, null);
         if(cursor.moveToFirst()){
