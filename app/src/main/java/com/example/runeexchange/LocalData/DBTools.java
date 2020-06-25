@@ -28,7 +28,11 @@ public class DBTools extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String create_table_query = "CREATE TABLE " + ITEM_TABLE + " ( " + COLUMN_ID  + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_ITEM_ID + " INTEGER, " + COLUMN_ITEM_NAME + " TEXT, " + COLUMN_ITEM_CURRENT_PRICE + " INTEGER)";
+        String create_table_query = "CREATE TABLE " + ITEM_TABLE + " ( " + COLUMN_ID  +
+                " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_ITEM_ID + " INTEGER, " +
+                COLUMN_ITEM_NAME + " TEXT, "
+                + COLUMN_ITEM_CURRENT_PRICE + " INTEGER)";
         db.execSQL(create_table_query);
     }
 

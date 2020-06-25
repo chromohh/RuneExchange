@@ -5,6 +5,7 @@ import android.util.Log;
 import com.example.runeexchange.model.ItemAsData;
 import com.example.runeexchange.model.ItemAsFavourite;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DataTools {
@@ -16,6 +17,9 @@ public class DataTools {
     }
 
     public List<ItemAsFavourite> updateFavouriteItemPrices(List<ItemAsData> data, List<ItemAsFavourite> favouriteData){
+        if(data != null || favouriteData != null){
+            return new ArrayList<ItemAsFavourite>();
+        }
         for(int i = 0; i < favouriteData.size(); i++ ){
             for(ItemAsData item2 : data){
                 if(favouriteData.get(i).getName().equals(item2.getName())){
