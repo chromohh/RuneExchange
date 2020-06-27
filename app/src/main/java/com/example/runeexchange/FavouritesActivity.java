@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,18 +13,28 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.example.runeexchange.LocalData.DBTools;
+import com.example.runeexchange.data.AcquireData;
 import com.example.runeexchange.data.DataTools;
 import com.example.runeexchange.model.ItemAsData;
 import com.example.runeexchange.model.ItemAsFavourite;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class FavouritesActivity extends AppCompatActivity {
 
-    private List<ItemAsData> data;
-    private List<ItemAsFavourite> favouriteData;
+    private ArrayList<ItemAsData> data;
+    private ArrayList<ItemAsFavourite> favouriteData;
     private DBTools dbTools;
     private DataTools dataTools;
 
@@ -31,18 +42,26 @@ public class FavouritesActivity extends AppCompatActivity {
     private FavouritesAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
 
+    private RequestQueue requestQueue;
+    private DataTools datatools;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favourite);
+        data = new ArrayList<ItemAsData>();
         dataTools = new DataTools();
         dbTools = new DBTools(this);
+        datatools = new DataTools();
 
-        data = this.getIntent().getParcelableArrayListExtra("data");
+        updateData();
 
         favouriteData = dbTools.getAllFavourites();
+
+        Log.e("bas", favouriteData.toString());
         favouriteData = dataTools.updateFavouriteItemPrices(data, favouriteData);
         Toolbar toolbar = findViewById(R.id.toolbar);
+        Log.e("bas", favouriteData.toString());
         setSupportActionBar(toolbar);
         buildRecycleView();
     }
@@ -84,4 +103,36 @@ public class FavouritesActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private void updateData(){
+        requestQueue = AcquireData.getInstance(this).getReqQueue();
+        JsonArrayRequest getRequest = new JsonArrayRequest(Request.Method.GET, datatools.getBASE_URL() + "/item/prices", null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        for(int i=0; i<response.length(); i++){
+                            try {
+                                JSONObject object = response.getJSONObject(i);
+                                ItemAsData temp = new ItemAsData(
+                                        object.getString("id"),
+                                        object.getString("name"),
+                                        object.getString("price"));
+                                data.add(temp);
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        Toast.makeText(getApplicationContext(), "data loaded", Toast.LENGTH_SHORT).show();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError e) {
+                        Toast.makeText(getApplicationContext(), "Couldnt load data", Toast.LENGTH_SHORT).show();
+                        Log.e("volley error", e.toString());
+                    }
+                });
+        requestQueue.add(getRequest);
+
+    }
 }

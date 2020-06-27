@@ -17,9 +17,7 @@ public class DataTools {
     }
 
     public ArrayList<ItemAsFavourite> updateFavouriteItemPrices(ArrayList<ItemAsData> data, ArrayList<ItemAsFavourite> favouriteData){
-        if(data != null || favouriteData != null){
-            return new ArrayList<ItemAsFavourite>();
-        }
+
         for(int i = 0; i < favouriteData.size(); i++ ){
             for(ItemAsData item2 : data){
                 if(favouriteData.get(i).getName().equals(item2.getName())){

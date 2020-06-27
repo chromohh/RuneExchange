@@ -35,7 +35,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     private RequestQueue requestQueue;
-    private DataTools datatools = new DataTools();
+    private DataTools datatools;
     private ArrayList<ItemAsData> data;
 
     private ProgressBar coolSpinning;
@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         coolSpinning = findViewById(R.id.progressBar);
         db = new DBTools(this);
-
+        datatools = new DataTools();
         data =  new ArrayList<ItemAsData>();
         updateData();
     }
@@ -109,7 +109,6 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.menu_favourite:
                 Intent startFavouriteIntent = new Intent(this, FavouritesActivity.class);
-                startFavouriteIntent.putParcelableArrayListExtra("data", data);
                 startFavouriteIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(startFavouriteIntent);
                 break;
